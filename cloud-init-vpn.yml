@@ -5,10 +5,10 @@ packages:
   - curl
   - ufw
 write_files:
-- path: /etc/environment
+- path: /root/environment
   content: |
-    CALLBACK_ID="$CALLBACK_ID"
-    CALLBACK_URL="$CALLBACK_URL"
+    CALLBACK_ID=$CALLBACK_ID
+    CALLBACK_URL=$CALLBACK_URL
   append: true
 runcmd:
   - [curl, "$CALLBACK_URL?state=configuration-init&serverId=$CALLBACK_ID"]
