@@ -47,6 +47,8 @@ echo "Callback ID - $callback_id"
 
 request_url="$callback_url?state=vpn-config&serverId=$callback_id&apiUrl= $api_url&certSha256=$cert_sha_256"
 
+echo $request_url
+
 response="$(curl -v "${request_url}")"
 
 echo $response
