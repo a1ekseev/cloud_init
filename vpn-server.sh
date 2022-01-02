@@ -40,6 +40,10 @@ ufw --force enable
 api_url=$(cat /opt/outline/access.txt | grep "apiUrl:" -m 1 | sed -e 's/apiUrl://g')
 cert_sha_256=$(cat /opt/outline/access.txt | grep "certSha256" -m 1 | sed -e 's/certSha256://g')
 
+echo "Callback URL - $CALLBACK_URL"
+
+echo "Callback ID - $CALLBACK_ID"
+
 request_url="$CALLBACK_URL?state=vpn-config&serverId=$CALLBACK_ID&apiUrl= $api_url&certSha256=$cert_sha_256"
 
 response="$(curl -v "${request_url}")"
