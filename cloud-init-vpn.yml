@@ -1,0 +1,26 @@
+#cloud-config
+package_update: true
+package_upgrade: true
+packages:
+  - curl
+  - ufw
+write_files:
+- path: /etc/environment
+  content: |
+    CALLBACK_ID="$SERVER_ID"
+    CALLBACK_URL="$SERVER_URL"
+  append: true
+runcmd:
+  - [curl, "$SERVER_URL?key=init-server&serverId=$SERVER_ID"]
+  - [curl, -fsSL, "https://get.docker.com", -o, /root/get-docker.sh]
+  - [sh, "/root/get-docker.sh"]
+  - [curl, -fsSL, "$BAHS_SCRIPT", -o, /root/init-vpn-server.sh]
+  - [bash, "/root/init-vpn-server.sh"]
+output:
+    init:
+        output: "> /var/log/cloud-init.out"
+        error: "> /var/log/cloud-init.err"
+    config: "tee -a /var/log/cloud-config.log"
+    final:
+        - ">> /var/log/cloud-final.out"
+        - "/var/log/cloud-final.err"
