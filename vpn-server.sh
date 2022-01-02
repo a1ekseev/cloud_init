@@ -42,6 +42,6 @@ cert_sha_256=$(cat /opt/outline/access.txt | grep "certSha256" -m 1 | sed -e 's/
 
 request_url="$CALLBACK_URL?state=vpn-config&serverId=$CALLBACK_ID&apiUrl= $api_url&certSha256=$cert_sha_256"
 
-curl "${request_url}"
+curl -v "${request_url}"
 
 echo "VPN Configuration completed"
