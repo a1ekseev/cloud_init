@@ -40,6 +40,8 @@ ufw --force enable
 api_url=$(cat /opt/outline/access.txt | grep "apiUrl:" -m 1 | sed -e 's/apiUrl://g')
 cert_sha_256=$(cat /opt/outline/access.txt | grep "certSha256" -m 1 | sed -e 's/certSha256://g')
 
-printf '%s?state=vpn-config&serverId=%s&apiUrl=%s&certSha256=%s' $CALLBACK_URL $CALLBACK_ID $api_url $cert_sha_256 | xargs -n 1 curl --location --request GET
+request_url="$CALLBACK_URL?state=vpn-config&serverId=$CALLBACK_ID&apiUrl= $api_url&certSha256=$cert_sha_256"
+
+curl "${request_url}"
 
 echo "VPN Configuration completed"
