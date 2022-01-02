@@ -45,7 +45,7 @@ callback_id=$(cat /root/environment | grep "CALLBACK_ID" -m 1 | sed -e 's/CALLBA
 echo "Callback URL - $callback_url"
 echo "Callback ID - $callback_id"
 
-request_url="$callback_url?state=vpn-config&serverId=$callback_id&apiUrl= $api_url&certSha256=$cert_sha_256"
+request_url="$callback_url?state=vpn-config&serverId=$callback_id&apiUrl=$api_url&certSha256=$cert_sha_256"
 
 echo $request_url
 
