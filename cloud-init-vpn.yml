@@ -16,6 +16,7 @@ runcmd:
   - [sh, "/root/get-docker.sh"]
   - [curl, -fsSL, "$BAHS_SCRIPT", -o, /root/init-vpn-server.sh]
   - [bash, "/root/init-vpn-server.sh"]
+  - [curl, -v, "$FINAL_CALLBACK"]
 output:
     init:
         output: "> /var/log/cloud-init.out"
