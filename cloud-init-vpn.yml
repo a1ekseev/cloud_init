@@ -7,11 +7,11 @@ packages:
 write_files:
 - path: /etc/environment
   content: |
-    CALLBACK_ID="$SERVER_ID"
-    CALLBACK_URL="$SERVER_URL"
+    CALLBACK_ID="$CALLBACK_ID"
+    CALLBACK_URL="$CALLBACK_URL"
   append: true
 runcmd:
-  - [curl, "$SERVER_URL?key=init-server&serverId=$SERVER_ID"]
+  - [curl, "$CALLBACK_URL?state=configuration-init&serverId=$CALLBACK_ID"]
   - [curl, -fsSL, "https://get.docker.com", -o, /root/get-docker.sh]
   - [sh, "/root/get-docker.sh"]
   - [curl, -fsSL, "$BAHS_SCRIPT", -o, /root/init-vpn-server.sh]
